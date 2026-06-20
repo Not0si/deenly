@@ -26,7 +26,14 @@ export default function HomeScreen() {
   if (todayValue) {
     return (
       <Div>
-        <Message>{JSON.stringify(todayValue)}</Message>
+        <Message>{todayValue.timings.Fajr}</Message>
+        <Message>{todayValue.timings.Dhuhr}</Message>
+        <Message>{todayValue.timings.Asr}</Message>
+        <Message>{todayValue.timings.Maghrib}</Message>
+        <Message>{todayValue.timings.Isha}</Message>
+        <Message>{todayValue.timings.Firstthird}</Message>
+        <Message>{todayValue.timings.Midnight}</Message>
+        <Message>{todayValue.timings.Lastthird}</Message>
       </Div>
     )
   }
