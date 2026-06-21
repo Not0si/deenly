@@ -11,7 +11,7 @@
     "lint": "expo lint",
     "format": "prettier . --write",
     "l10n": "node ./src/l10n/generator.js",
-    "andbuild": "eas build --platform android --profile development"
+    "build:preview": "eas build --platform android --profile preview"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
