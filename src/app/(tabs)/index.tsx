@@ -1,8 +1,6 @@
-import { useGetPrayerTimes } from "@/apis/aladhan-api"
 import { Div } from "@/components/ui/div"
 import { Message } from "@/components/ui/message"
 import { useLocation } from "@/hooks/use-location"
-import { getDateKey } from "@/utils/datetime"
 import { Pressable } from "react-native"
 
 export default function HomeScreen() {
@@ -14,29 +12,29 @@ export default function HomeScreen() {
     clearLocation,
   } = useLocation()
 
-  const { data } = useGetPrayerTimes(2026, 6, {
-    latitude: location?.coords.latitude.toString(),
-    longitude: location?.coords.longitude.toString(),
-    method: 3,
-  })
+  // const { data } = useGetPrayerTimes(2026, 6, {
+  //   latitude: location?.coords.latitude.toString(),
+  //   longitude: location?.coords.longitude.toString(),
+  //   method: 3,
+  // })
 
-  const todayKey = getDateKey(new Date())
-  const todayValue = data?.[todayKey]
+  // const todayKey = getDateKey(new Date())
+  // const todayValue = data?.[todayKey]
 
-  if (todayValue) {
-    return (
-      <Div>
-        <Message>{todayValue.timings.Fajr}</Message>
-        <Message>{todayValue.timings.Dhuhr}</Message>
-        <Message>{todayValue.timings.Asr}</Message>
-        <Message>{todayValue.timings.Maghrib}</Message>
-        <Message>{todayValue.timings.Isha}</Message>
-        <Message>{todayValue.timings.Firstthird}</Message>
-        <Message>{todayValue.timings.Midnight}</Message>
-        <Message>{todayValue.timings.Lastthird}</Message>
-      </Div>
-    )
-  }
+  // if (todayValue) {
+  //   return (
+  //     <Div>
+  //       <Message>{todayValue.timings.Fajr}</Message>
+  //       <Message>{todayValue.timings.Dhuhr}</Message>
+  //       <Message>{todayValue.timings.Asr}</Message>
+  //       <Message>{todayValue.timings.Maghrib}</Message>
+  //       <Message>{todayValue.timings.Isha}</Message>
+  //       <Message>{todayValue.timings.Firstthird}</Message>
+  //       <Message>{todayValue.timings.Midnight}</Message>
+  //       <Message>{todayValue.timings.Lastthird}</Message>
+  //     </Div>
+  //   )
+  // }
 
   if (isLoading) {
     return (

@@ -1,15 +1,14 @@
-import { Stack } from "expo-router"
-import { StatusBar } from "expo-status-bar"
-import "react-native-reanimated"
-
 import { queryClient } from "@/apis/config"
 import { migrateDbIfNeeded } from "@/repositories"
 import { useTheme } from "@/stores/theme"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { useFonts } from "expo-font"
+import { Stack } from "expo-router"
 import * as SplashScreen from "expo-splash-screen"
 import { SQLiteProvider } from "expo-sqlite"
+import { StatusBar } from "expo-status-bar"
 import { useEffect } from "react"
+import "react-native-reanimated"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 SplashScreen.preventAutoHideAsync()
@@ -36,6 +35,14 @@ export default function RootLayout() {
     return null
   }
 
+  // useEffect(() => {
+  //   // Set the background color
+  //   NavigationBar.setBackgroundColorAsync(colors.bg)
+
+  //   // Set button icon colors ('dark' for dark icons on light bg, 'light' for light icons)
+  //   NavigationBar.setButtonStyleAsync(isDark ? "light" : "dark")
+  // }, [])
+
   return (
     <SQLiteProvider databaseName='medxcore.db' onInit={migrateDbIfNeeded}>
       <QueryClientProvider client={queryClient}>
@@ -49,16 +56,6 @@ export default function RootLayout() {
           >
             <Stack.Screen
               name='(tabs)'
-              options={{
-                headerShown: false,
-                contentStyle: {
-                  backgroundColor: colors.bg,
-                  flex: 1,
-                },
-              }}
-            />
-            <Stack.Screen
-              name='counter'
               options={{
                 headerShown: false,
                 contentStyle: {

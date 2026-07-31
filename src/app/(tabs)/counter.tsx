@@ -81,7 +81,6 @@ export default function Counter() {
 
         {/* Reset Button */}
         <Pressable
-          onPress={reset}
           onLongPress={reset}
           onPressIn={startLongPressAnimation}
           onPressOut={stopLongPressAnimation}

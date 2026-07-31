@@ -8,9 +8,10 @@ import {
 } from "react-native"
 
 import Animated, {
+  Easing,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
+  withTiming,
 } from "react-native-reanimated"
 
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
@@ -18,7 +19,7 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import { useLocale } from "@/stores/locale"
 import { useTheme } from "@/stores/theme"
 
-import { Home2Outlined } from "@lineiconshq/free-icons"
+import { DifyOutlined, Home2Outlined } from "@lineiconshq/free-icons"
 import { Lineicons } from "@lineiconshq/react-native-lineicons"
 
 export function TabBarCustom({
@@ -36,21 +37,18 @@ export function TabBarCustom({
   const translateX = useSharedValue(0)
   const indicatorWidth = useSharedValue(0)
 
-  const getVisualIndex = (index: number) =>
-    dir === "rtl" ? state.routes.length - 1 - index : index
-
   useEffect(() => {
     const layout = layouts[state.index]
     if (!layout) return
 
-    translateX.value = withSpring(layout.x, {
-      damping: 15,
-      stiffness: 180,
+    translateX.value = withTiming(layout.x, {
+      duration: 100,
+      easing: Easing.ease,
     })
 
-    indicatorWidth.value = withSpring(layout.width, {
-      damping: 15,
-      stiffness: 180,
+    indicatorWidth.value = withTiming(layout.width, {
+      duration: 100,
+      easing: Easing.ease,
     })
   }, [state.index, layouts])
 
@@ -62,64 +60,66 @@ export function TabBarCustom({
   })
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: colors.bg_canvas,
-          flexDirection: dir === "rtl" ? "row-reverse" : "row",
-        },
-      ]}
-    >
-      {/* Indicator */}
-      <Animated.View
-        pointerEvents='none'
+    <View style={{ position: "absolute", bottom: 0, alignSelf: "center" }}>
+      <View
         style={[
-          styles.indicator,
-          { backgroundColor: colors.bg_surface },
-          indicatorStyle,
+          styles.container,
+          {
+            backgroundColor: colors.bg_canvas,
+            flexDirection: dir === "rtl" ? "row-reverse" : "row",
+          },
         ]}
-      />
+      >
+        {/* Indicator */}
+        <Animated.View
+          pointerEvents='none'
+          style={[
+            styles.indicator,
+            { backgroundColor: colors.bg_surface },
+            indicatorStyle,
+          ]}
+        />
 
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key]
+        {state.routes.map((route, index) => {
+          const { options } = descriptors[route.key]
 
-        const label = (options.tabBarLabel ??
-          options.title ??
-          route.name) as string
+          const label = (options.tabBarLabel ??
+            options.title ??
+            route.name) as string
 
-        const isFocused = state.index === index
+          const isFocused = state.index === index
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: "tabPress",
-            target: route.key,
-            canPreventDefault: true,
-          })
+          const onPress = () => {
+            const event = navigation.emit({
+              type: "tabPress",
+              target: route.key,
+              canPreventDefault: true,
+            })
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name)
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name)
+            }
           }
-        }
 
-        return (
-          <TabButton
-            key={route.key}
-            label={label}
-            routeName={route.name}
-            isFocused={isFocused}
-            dir={dir}
-            onPress={onPress}
-            onLayout={(e: LayoutChangeEvent) => {
-              const { x, width } = e.nativeEvent.layout
-              setLayouts((prev) => ({
-                ...prev,
-                [index]: { x, width },
-              }))
-            }}
-          />
-        )
-      })}
+          return (
+            <TabButton
+              key={route.key}
+              label={label}
+              routeName={route.name}
+              isFocused={isFocused}
+              dir={dir}
+              onPress={onPress}
+              onLayout={(e: LayoutChangeEvent) => {
+                const { x, width } = e.nativeEvent.layout
+                setLayouts((prev) => ({
+                  ...prev,
+                  [index]: { x, width },
+                }))
+              }}
+            />
+          )
+        })}
+      </View>
     </View>
   )
 }
@@ -175,7 +175,13 @@ function RouteIcon({ name, isFocused }: { name: string; isFocused: boolean }) {
     color: isFocused ? colors.accent : colors.icon,
   }
 
-  return <Lineicons icon={Home2Outlined} {...props} />
+  switch (name) {
+    case "counter":
+      return <Lineicons icon={DifyOutlined} {...props} />
+
+    default:
+      return <Lineicons icon={Home2Outlined} {...props} />
+  }
 }
 
 /* ---------------- STYLES ---------------- */
