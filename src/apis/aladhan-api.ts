@@ -17,7 +17,6 @@ type IOptions = {
   latitude: string | undefined
   longitude: string | undefined
   method?: IPrayerCalculationMethod
-  shafaq?: string
   latitudeAdjustmentMethod?: ILatitudeAdjustmentMethod
 }
 
@@ -33,6 +32,7 @@ export const useGetPrayerTimes = (
     calendarMethod: "UAQ",
     timezonestring: "UTC",
     iso8601: true,
+    shafaq: "general",
   })
 
   return useQuery({

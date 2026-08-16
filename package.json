@@ -9,9 +9,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "install-check": "expo install --check",
     "format": "prettier . --write",
     "l10n": "node ./src/l10n/generator.js",
-    "build:preview": "eas build --platform android --profile preview"
+    "build-apk": "eas build --platform android --profile preview --local"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

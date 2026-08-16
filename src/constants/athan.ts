@@ -1,26 +1,3 @@
-export const calendarMethod = {
-  HJCoSA: {
-    value: "HJCoSA",
-    description:
-      "High Judicial Council of Saudi Arabia (this is used on aladhan.com)",
-  },
-  UAQ: {
-    value: "UAQ",
-    description: "Umm al-Qura",
-  },
-  DIYANET: {
-    value: "DIYANET",
-    description: "Diyanet İşleri Başkanlığı",
-  },
-  MATHEMATICAL: {
-    value: "MATHEMATICAL",
-    description: "",
-  },
-} as const
-
-export type ICalendarMethod =
-  (typeof calendarMethod)[keyof typeof calendarMethod]["value"]
-
 //========================================
 //
 //
@@ -43,43 +20,6 @@ export const latitudeAdjustmentMethod = {
 
 export type ILatitudeAdjustmentMethod =
   (typeof latitudeAdjustmentMethod)[keyof typeof latitudeAdjustmentMethod]["value"]
-
-//========================================
-//
-//
-//========================================
-
-export const midnightMode = {
-  Standard: {
-    value: 0,
-    description: "Mid Sunset to Sunrise",
-  },
-  Jafari: {
-    value: 1,
-    description: "Mid Sunset to Fajr",
-  },
-} as const
-
-export type IMidnightMode =
-  (typeof midnightMode)[keyof typeof midnightMode]["value"]
-
-//========================================
-//
-//
-//========================================
-
-export const school = {
-  Shafi: {
-    value: 0,
-    description: "Shafi",
-  },
-  Hanafi: {
-    value: 1,
-    description: "Hanafi",
-  },
-} as const
-
-export type ISchool = (typeof school)[keyof typeof school]["value"]
 
 //========================================
 //

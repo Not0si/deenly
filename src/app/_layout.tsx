@@ -55,13 +55,27 @@ export default function RootLayout() {
             }}
           >
             <Stack.Screen
-              name='(tabs)'
+              name='index'
               options={{
-                headerShown: false,
-                contentStyle: {
-                  backgroundColor: colors.bg,
-                  flex: 1,
-                },
+                headerShown: false, // Hides native header since HomeScreen renders its own custom header
+              }}
+            />
+            <Stack.Screen
+              name='salat'
+              options={{
+                headerShown: false, // Hides native header since HomeScreen renders its own custom header
+              }}
+            />
+            <Stack.Screen
+              name='counter-clicker'
+              options={{
+                headerShown: false, // Hides native header since HomeScreen renders its own custom header
+              }}
+            />
+            <Stack.Screen
+              name='counter-day'
+              options={{
+                headerShown: false, // Hides native header since HomeScreen renders its own custom header
               }}
             />
             <Stack.Screen
