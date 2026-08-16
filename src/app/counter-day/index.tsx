@@ -2,7 +2,7 @@ import { useGetDayCounts } from "@/apis/day-count"
 import { Div } from "@/components/ui/div"
 import { Message } from "@/components/ui/message"
 
-export default async function Counter() {
+export default function Counter() {
   const { data } = useGetDayCounts({
     page: 1,
     limit: 10,

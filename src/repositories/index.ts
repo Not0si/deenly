@@ -25,6 +25,8 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase) {
   }
 }
 
+// #region Migrations
+
 async function migrateV1(db: SQLiteDatabase) {
   //
   await db.execAsync(`
@@ -74,7 +76,10 @@ async function migrateV1(db: SQLiteDatabase) {
   // )
 }
 
-//
+// #endregion
+
+// #region Types
+
 export interface PaginationParams {
   page?: number // 1-based page index (default: 1)
   limit?: number // Number of items per page (default: 20)
@@ -87,3 +92,5 @@ export interface PaginatedResult<T> {
   limit: number
   totalPages: number
 }
+
+// #endregion
